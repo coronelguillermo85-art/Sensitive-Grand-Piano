@@ -1,6 +1,15 @@
+
 # 🎹 Sensitive Grand Piano · Professional Edition
 
 Instrumento virtual de piano diseñado para ofrecer alta fidelidad sonora y respuesta táctil inmediata. Este proyecto está optimizado para entornos de producción musical basados en web, garantizando una latencia mínima y una integración fluida con hardware externo.
+
+## 🌐 Acceso rápido
+
+Podés usar la aplicación directamente desde el navegador sin instalar nada:
+
+**👉 https://sensitive-grand-piano.vercel.app/**
+
+Compatible con Chrome y Edge. No requiere instalación.
 
 ---
 
@@ -65,6 +74,9 @@ npx electron-builder --win --target nsis
 ---
 
 > Proyecto optimizado para Web Audio API · Desarrollado por [Sensitive Lab](https://github.com/coronelguillermo85-art)
+---
+
+> Proyecto optimizado para Web Audio API · Desarrollado por [Sensitive Lab](https://github.com/coronelguillermo85-art)
 
 <img width="1600" height="1105" alt="image" src="https://github.com/user-attachments/assets/ad0d6b83-4f6f-4c3a-840e-67ff58aadab4" />
 
@@ -73,4 +85,4 @@ npx electron-builder --win --target nsis
 
 
 ---
-*Proyecto optimizado para Web Audio API.*
+*Proyecto de Guillermo Coronel.*
