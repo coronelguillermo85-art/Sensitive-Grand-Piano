@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Sensitive Grand Piano · Professional Edition</title>
+    <title>Sensitive Grand Piano · 88 Teclas · Profesional</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
@@ -17,7 +17,7 @@
             padding: 20px;
         }
         
-        .pro-panel {
+        .sensitive-panel {
             width: 100%;
             max-width: 1400px;
             background: linear-gradient(145deg, #1a1c26, #0e1018);
@@ -36,7 +36,7 @@
             gap: 15px;
         }
         .brand h1 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 600;
             background: linear-gradient(135deg, #e8e8f0, #a0a8c0);
             -webkit-background-clip: text;
@@ -113,8 +113,8 @@
             height: 16px;
             background: #00ccff;
             border-radius: 2px;
-            transform: translateX(-50%) rotate(0deg);
-            transition: transform 0.02s linear;
+            transform: translateX(-50%) rotate(45deg);
+            transition: transform 0.05s linear;
         }
         .knob-value {
             font-size: 0.55rem;
@@ -294,7 +294,6 @@
             background: #ff6640;
             margin-left: 5px;
             box-shadow: 0 0 5px #ff6640;
-            transition: 0.1s;
         }
         .footer {
             text-align: center;
@@ -309,6 +308,7 @@
             .keyboard { height: 150px; }
             .black { height: 90px; }
             .lcd-chord { font-size: 1.2rem; }
+            .fx-unit { gap: 3px; }
             .pro-knob { width: 35px; height: 35px; }
         }
         @media (max-width: 700px) {
@@ -317,11 +317,11 @@
     </style>
 </head>
 <body>
-<div class="pro-panel">
+<div class="sensitive-panel">
     <div class="lcd-header">
         <div class="brand">
             <h1>SENSITIVE GRAND PIANO</h1>
-            <p>PROFESSIONAL · 88 KEYS · VST CLASS</p>
+            <p>88 KEYS · PROFESSIONAL · VST CLASS</p>
         </div>
         <div class="lcd">
             <div id="chord-name" class="lcd-chord">—</div>
@@ -341,31 +341,35 @@
     <div class="fx-rack">
         <div class="fx-unit">
             <label>REVERB</label>
-            <div class="pro-knob" id="reverb-knob" data-value="32" data-min="0" data-max="70"></div>
+            <div class="pro-knob" id="reverb-knob" data-value="32"></div>
             <div class="knob-value" id="reverb-val">32%</div>
         </div>
         <div class="fx-unit">
             <label>CHORUS</label>
-            <div class="pro-knob" id="chorus-knob" data-value="18" data-min="0" data-max="60"></div>
+            <div class="pro-knob" id="chorus-knob" data-value="18"></div>
             <div class="knob-value" id="chorus-val">18%</div>
         </div>
         <div class="fx-unit">
             <label>BRILLO</label>
-            <div class="pro-knob" id="bright-knob" data-value="70" data-min="20" data-max="100"></div>
+            <div class="pro-knob" id="bright-knob" data-value="70"></div>
             <div class="knob-value" id="bright-val">70%</div>
         </div>
         <div class="fx-unit">
             <label>VOLUMEN</label>
-            <div class="pro-knob" id="volume-knob" data-value="75" data-min="10" data-max="100"></div>
+            <div class="pro-knob" id="volume-knob" data-value="75"></div>
             <div class="knob-value" id="volume-val">75%</div>
         </div>
         <div class="fx-unit">
             <label>VU</label>
             <div class="vu-meter" id="vu-meter">
-                <div class="vu-bar" style="height: 0px"></div><div class="vu-bar" style="height: 0px"></div>
-                <div class="vu-bar" style="height: 0px"></div><div class="vu-bar" style="height: 0px"></div>
-                <div class="vu-bar" style="height: 0px"></div><div class="vu-bar" style="height: 0px"></div>
-                <div class="vu-bar" style="height: 0px"></div><div class="vu-bar" style="height: 0px"></div>
+                <div class="vu-bar" style="height: 0px"></div>
+                <div class="vu-bar" style="height: 0px"></div>
+                <div class="vu-bar" style="height: 0px"></div>
+                <div class="vu-bar" style="height: 0px"></div>
+                <div class="vu-bar" style="height: 0px"></div>
+                <div class="vu-bar" style="height: 0px"></div>
+                <div class="vu-bar" style="height: 0px"></div>
+                <div class="vu-bar" style="height: 0px"></div>
             </div>
         </div>
     </div>
@@ -382,11 +386,11 @@
 
     <div class="status">
         <span>🎹 MIDI: <span id="midi-status">DESCONECTADO</span><span id="midi-led" class="midi-led"></span></span>
-        <span>🎼 C0 - C8 (88 teclas)</span>
+        <span>🎼 C0 - B6 (88 teclas)</span>
         <span>🔊 <span id="audio-status">INACTIVO</span></span>
         <span>💾 6 presets · FX real-time</span>
     </div>
-    <div class="footer">· CLIC O ARRASTRE · MIDI FÍSICO · PEDAL SUSTAIN (CC64) · GIRO LAS PERILLAS ·</div>
+    <div class="footer">· CLIC O ARRASTRE · MIDI FÍSICO · PEDAL SUSTAIN (CC64) · PROCESAMIENTO EN TIEMPO REAL ·</div>
 </div>
 
 <script>
@@ -405,6 +409,7 @@
     let filterNode = null;
     let volumeNode = null;
     let compressorNode = null;
+    let fxChainReady = false;
     
     let meterInterval = null;
     
@@ -420,12 +425,11 @@
     const noteNames = ['Do', 'Do#', 'Re', 'Re#', 'Mi', 'Fa', 'Fa#', 'Sol', 'Sol#', 'La', 'La#', 'Si'];
     const simpleNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     
-    // ========== CADENA DE EFECTOS ==========
     function buildEffectChain() {
         if (!audioReady) return;
         
-        reverbNode = new Tone.Reverb({ decay: 1.6, wet: 0.32, preDelay: 0.04 });
-        chorusNode = new Tone.Chorus({ frequency: 1.2, delayTime: 3.2, depth: 0.18, wet: 0.18 });
+        reverbNode = new Tone.Reverb({ decay: 1.6, preDelay: 0.04 });
+        chorusNode = new Tone.Chorus({ frequency: 1.2, delayTime: 3.2, depth: 0.18 });
         filterNode = new Tone.Filter(2000, "lowpass");
         volumeNode = new Tone.Gain(0.75);
         compressorNode = new Tone.Compressor({ threshold: -18, ratio: 2.5, attack: 0.01, release: 0.12 });
@@ -439,64 +443,29 @@
             compressorNode.connect(volumeNode);
             volumeNode.toDestination();
         }
+        fxChainReady = true;
+        updateEffects();
+        
+        if (meterInterval) clearInterval(meterInterval);
+        meterInterval = setInterval(() => {
+            if (!audioReady) return;
+            const activity = Math.min(1, activeNotes.size / 12);
+            const bars = document.querySelectorAll('.vu-bar');
+            for (let i = 0; i < bars.length; i++) {
+                const height = Math.min(25, Math.max(0, activity * 25 * (0.3 + i / bars.length)));
+                bars[i].style.height = height + 'px';
+            }
+        }, 50);
     }
     
     function updateEffects() {
-        if (!reverbNode) return;
+        if (!fxChainReady) return;
         reverbNode.wet.value = parseFloat(document.getElementById('reverb-val').textContent) / 100;
         chorusNode.wet.value = parseFloat(document.getElementById('chorus-val').textContent) / 100;
         filterNode.frequency.value = 600 + (parseFloat(document.getElementById('bright-val').textContent) / 100) * 10000;
         volumeNode.gain.value = parseFloat(document.getElementById('volume-val').textContent) / 100;
     }
     
-    // ========== KNOBS FUNCIONALES ==========
-    function initKnobs() {
-        const knobs = document.querySelectorAll('.pro-knob');
-        
-        knobs.forEach(knob => {
-            const valSpan = knob.nextElementSibling;
-            const minVal = parseFloat(knob.getAttribute('data-min') || 0);
-            const maxVal = parseFloat(knob.getAttribute('data-max') || 100);
-            let currentVal = parseFloat(knob.getAttribute('data-value') || valSpan.textContent);
-            let dragging = false;
-            let startY = 0;
-            let startVal = currentVal;
-            
-            // Inicializar valor visual
-            valSpan.textContent = Math.round(currentVal) + '%';
-            const rotation = (currentVal - minVal) / (maxVal - minVal) * 270 - 135;
-            knob.style.transform = `rotate(${rotation}deg)`;
-            
-            knob.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                dragging = true;
-                startY = e.clientY;
-                startVal = currentVal;
-                knob.style.cursor = 'ns-resize';
-                document.body.style.cursor = 'ns-resize';
-            });
-            
-            window.addEventListener('mousemove', (e) => {
-                if (!dragging) return;
-                const delta = (startY - e.clientY) * 0.6;
-                let newVal = Math.min(maxVal, Math.max(minVal, startVal + delta));
-                if (Math.abs(newVal - currentVal) < 0.5) return;
-                currentVal = newVal;
-                valSpan.textContent = Math.round(currentVal) + '%';
-                const newRotation = (currentVal - minVal) / (maxVal - minVal) * 270 - 135;
-                knob.style.transform = `rotate(${newRotation}deg)`;
-                updateEffects();
-            });
-            
-            window.addEventListener('mouseup', () => {
-                dragging = false;
-                knob.style.cursor = '';
-                document.body.style.cursor = '';
-            });
-        });
-    }
-    
-    // ========== INSTRUMENTOS ==========
     function createGrand() {
         const s = new Tone.PolySynth(Tone.Synth).toDestination();
         s.set({ oscillator: { type: "sine" }, envelope: { attack: 0.006, decay: 0.28, sustain: 0.32, release: 1.6 } });
@@ -540,10 +509,9 @@
             case 'organ': currentSynth = createOrgan(); break;
             default: currentSynth = createGrand();
         }
-        if (filterNode && currentSynth) {
+        if (fxChainReady && currentSynth) {
             currentSynth.connect(filterNode);
         }
-        activeNotes.forEach(midi => { currentSynth.triggerAttack(midiToNote(midi), undefined, 0.8); });
     }
     
     function midiToNote(midi) { return simpleNames[midi % 12] + (Math.floor(midi / 12) - 1); }
@@ -594,7 +562,7 @@
         const all = new Set([...activeNotes, ...sustainedNotes]);
         if (all.size === 0) {
             chordNameEl.textContent = '—';
-            chordDetailEl.textContent = '🎹 Esperando notas...';
+            chordDetailEl.textContent = '🎹 Toca el piano';
             return;
         }
         const sorted = Array.from(all).sort((a,b)=>a-b);
@@ -625,7 +593,8 @@
     // ========== TECLADO ==========
     const keyboard = document.getElementById('keyboard');
     keyboard.innerHTML = '';
-    const startMidi = 24, endMidi = 108;
+    const startMidi = 24;   // C0 (DO)
+    const endMidi = 108;    // C8 (DO)
     function isBlack(m) { const pc = m % 12; return pc === 1 || pc === 3 || pc === 6 || pc === 8 || pc === 10; }
     
     for (let m = startMidi; m <= endMidi; m++) {
@@ -642,71 +611,59 @@
     
     document.addEventListener('mouseup', () => { if (mouseDown) { mouseDown = false; if (lastMouseNote !== null) { noteOff(lastMouseNote); lastMouseNote = null; } } });
     
-    // ========== MIDI ==========
-    function flashMIDI() { 
-        midiLed.style.background = '#00ff80'; 
-        midiLed.style.boxShadow = '0 0 8px #00ff80';
-        setTimeout(() => { 
-            if (midiAccess && midiAccess.inputs.size > 0) {
-                midiLed.style.background = '#00ff80';
-            } else {
-                midiLed.style.background = '#ff6640';
-                midiLed.style.boxShadow = '0 0 5px #ff6640';
-            }
-        }, 200); 
+    // ========== KNOBS ==========
+    function initKnob(knobId, valId, minVal, maxVal, defaultVal, callback) {
+        const knob = document.getElementById(knobId);
+        const valSpan = document.getElementById(valId);
+        let currentVal = defaultVal;
+        
+        valSpan.textContent = Math.round(currentVal) + '%';
+        callback(currentVal / 100);
+        
+        // Rotar la marca del knob
+        function updateKnobRotation(value) {
+            const angle = -135 + (value / 100) * 270;
+            knob.style.transform = `rotate(${angle}deg)`;
+        }
+        updateKnobRotation(defaultVal);
+        
+        let dragging = false;
+        let startY = 0;
+        let startVal = currentVal;
+        
+        knob.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            dragging = true;
+            startY = e.clientY;
+            startVal = currentVal;
+            document.body.style.cursor = 'ns-resize';
+        });
+        
+        window.addEventListener('mousemove', (e) => {
+            if (!dragging) return;
+            const delta = (startY - e.clientY) * 0.5;
+            let newVal = Math.min(maxVal, Math.max(minVal, startVal + delta));
+            currentVal = newVal;
+            valSpan.textContent = Math.round(currentVal) + '%';
+            callback(currentVal / 100);
+            updateKnobRotation(currentVal);
+        });
+        
+        window.addEventListener('mouseup', () => {
+            dragging = false;
+            document.body.style.cursor = '';
+        });
     }
     
-    function onMIDI(msg) { 
-        if (!audioReady) return; 
-        flashMIDI(); 
-        const [cmd, note, vel] = msg.data; 
-        if (cmd >= 144 && cmd <= 159 && vel > 0) { 
-            noteOn(note, vel); 
-        } else if ((cmd >= 128 && cmd <= 143) || (cmd >= 144 && cmd <= 159 && vel === 0)) { 
-            noteOff(note); 
-        } else if ((cmd & 0xF0) === 0xB0 && note === 64) { 
-            if (vel >= 64 && !sustainOn) { 
-                sustainOn = true; 
-                sustainBtn.textContent = '🔘 SUSTAIN ON'; 
-                sustainBtn.style.background = '#2a4a6a'; 
-            } else if (vel < 64 && sustainOn) { 
-                sustainOn = false; 
-                clearSustained(); 
-                sustainBtn.textContent = '♮ SUSTAIN'; 
-                sustainBtn.style.background = '#15181f'; 
-            } 
-        } 
-    }
+    initKnob('reverb-knob', 'reverb-val', 0, 100, 32, (v) => { if (reverbNode) reverbNode.wet.value = v; updateEffects(); });
+    initKnob('chorus-knob', 'chorus-val', 0, 100, 18, (v) => { if (chorusNode) chorusNode.wet.value = v; updateEffects(); });
+    initKnob('bright-knob', 'bright-val', 0, 100, 70, (v) => { if (filterNode) filterNode.frequency.value = 600 + v * 10000; updateEffects(); });
+    initKnob('volume-knob', 'volume-val', 0, 100, 75, (v) => { if (volumeNode) volumeNode.gain.value = v; updateEffects(); });
     
-    async function connectMIDI() { 
-        if (!navigator.requestMIDIAccess) { 
-            midiStatusSpan.textContent = 'NO SOPORTADO'; 
-            return; 
-        } 
-        midiStatusSpan.textContent = 'BUSCANDO...'; 
-        try { 
-            midiAccess = await navigator.requestMIDIAccess(); 
-            const inputs = midiAccess.inputs; 
-            if (inputs.size === 0) { 
-                midiStatusSpan.textContent = 'SIN DISPOSITIVOS'; 
-                midiLed.style.background = '#ff4440'; 
-            } else { 
-                inputs.forEach(input => { 
-                    input.onmidimessage = onMIDI; 
-                    console.log('MIDI conectado:', input.name);
-                }); 
-                midiStatusSpan.textContent = `${inputs.size} DISPOSITIVO${inputs.size > 1 ? 'S' : ''}`; 
-                midiLed.style.background = '#00ff80'; 
-                midiLed.style.boxShadow = '0 0 8px #00ff80';
-            } 
-        } catch(e) { 
-            console.error('MIDI error:', e);
-            midiStatusSpan.textContent = 'ERROR'; 
-            midiLed.style.background = '#ff4440'; 
-        } 
-    }
+    function flashMIDI() { midiLed.style.background = '#00ff80'; setTimeout(() => { midiLed.style.background = (midiAccess && midiAccess.inputs.size > 0) ? '#00ff80' : '#ff6640'; }, 150); }
+    function onMIDI(msg) { if (!audioReady) return; flashMIDI(); const [cmd, note, vel] = msg.data; if (cmd >= 144 && cmd <= 159 && vel > 0) noteOn(note, vel); else if ((cmd >= 128 && cmd <= 143) || (cmd >= 144 && cmd <= 159 && vel === 0)) noteOff(note); else if ((cmd & 0xF0) === 0xB0 && note === 64) { if (vel >= 64 && !sustainOn) { sustainOn = true; sustainBtn.textContent = '🔘 SUSTAIN ON'; sustainBtn.style.background = '#2a4a6a'; } else if (vel < 64 && sustainOn) { sustainOn = false; clearSustained(); sustainBtn.textContent = '♮ SUSTAIN'; sustainBtn.style.background = '#15181f'; } } }
+    async function connectMIDI() { if (!navigator.requestMIDIAccess) { midiStatusSpan.textContent = 'NO SOPORTADO'; return; } midiStatusSpan.textContent = 'SOLICITANDO...'; try { midiAccess = await navigator.requestMIDIAccess(); const inputs = midiAccess.inputs; if (inputs.size === 0) { midiStatusSpan.textContent = 'SIN DISPOSITIVOS'; midiLed.style.background = '#ff4440'; } else { inputs.forEach(inp => inp.onmidimessage = onMIDI); midiStatusSpan.textContent = `${inputs.size} DISPOSITIVO${inputs.size > 1 ? 'S' : ''}`; midiLed.style.background = '#00ff80'; } } catch(e) { midiStatusSpan.textContent = 'ERROR'; midiLed.style.background = '#ff4440'; } }
     
-    // ========== PRESETS ==========
     document.querySelectorAll('.preset').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.preset').forEach(b => b.classList.remove('active'));
@@ -716,21 +673,6 @@
         });
     });
     
-    // ========== VU METER ==========
-    function startVUMeter() {
-        if (meterInterval) clearInterval(meterInterval);
-        meterInterval = setInterval(() => {
-            if (!audioReady) return;
-            const activity = Math.min(1, activeNotes.size / 12);
-            const bars = document.querySelectorAll('.vu-bar');
-            for (let i = 0; i < bars.length; i++) {
-                const height = Math.min(28, activity * 28 * (1 - i / bars.length * 0.5));
-                bars[i].style.height = height + 'px';
-            }
-        }, 50);
-    }
-    
-    // ========== INICIAR ==========
     async function startAudio() {
         if (audioReady) return;
         chordDetailEl.textContent = '🔄 Iniciando motor profesional...';
@@ -738,8 +680,6 @@
         currentSynth = createGrand();
         audioReady = true;
         buildEffectChain();
-        updateEffects();
-        startVUMeter();
         startBtn.textContent = '✅ ACTIVO';
         startBtn.style.background = '#3a6a4a';
         audioStatusSpan.textContent = 'ACTIVO';
@@ -753,7 +693,6 @@
     midiBtn.addEventListener('click', connectMIDI);
     sustainBtn.addEventListener('click', () => { if (!audioReady) { startAudio(); return; } if (sustainOn) { sustainOn = false; clearSustained(); sustainBtn.textContent = '♮ SUSTAIN'; sustainBtn.style.background = '#15181f'; } else { sustainOn = true; sustainBtn.textContent = '🔘 SUSTAIN ON'; sustainBtn.style.background = '#2a4a6a'; } });
     
-    initKnobs();
     updateChord();
 })();
 </script>
