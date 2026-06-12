@@ -15,5 +15,12 @@ Instrumento virtual de piano diseñado para ofrecer alta fidelidad sonora y resp
 3. El sistema reconocerá automáticamente cualquier controlador MIDI conectado al sistema.
 4. Utilizar la interfaz en pantalla o el dispositivo MIDI para la ejecución.
 
+
+<img width="1600" height="1105" alt="image" src="https://github.com/user-attachments/assets/ad0d6b83-4f6f-4c3a-840e-67ff58aadab4" />
+
+https://sensitive-grand-piano.vercel.app/
+
+
+
 ---
 *Proyecto optimizado para Web Audio API.*
