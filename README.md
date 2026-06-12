@@ -68,7 +68,7 @@ npx electron-builder --win --target nsis
 
 <img width="1600" height="1105" alt="image" src="https://github.com/user-attachments/assets/ad0d6b83-4f6f-4c3a-840e-67ff58aadab4" />
 
-https://sensitive-grand-piano.vercel.app/
+
 
 
 
