@@ -9,11 +9,6 @@ Instrumento virtual de piano diseñado para ofrecer alta fidelidad sonora y resp
 - **Cadena de efectos:** Procesamiento de señal integrado para modelado de sonido tipo estudio.
 - **Visualización:** Monitor VU en tiempo real para análisis de salida de audio.
 
-## 🚀 Despliegue (Deploy)
-El proyecto es una aplicación web estática de archivo único. Compatible con:
-- **Vercel / Netlify:** Configuración automática mediante detección de `index.html`.
-- **GitHub Pages:** Despliegue directo mediante la activación en la configuración del repositorio.
-
 ## 🛠 Instrucciones de uso
 1. Abrir la aplicación en un navegador compatible (Chrome/Edge recomendado).
 2. Hacer clic en **"Iniciando motor"** para habilitar la síntesis de audio.
